@@ -1,7 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -10,22 +11,27 @@ public class HomePage extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static JButton generarCSVButton, gestionSedesButton;
+	static JButton generarCSVButton, importarSedesButton;
 
 	public HomePage(String title) {
 		super(title);
-		JPanel buttonPanel = new JPanel();
+		JPanel titlePanel = new JPanel();
+	    this.setPreferredSize(new Dimension(400, 300));
 
 	    TitledBorder border = new TitledBorder("PEV-UMA");
 	    border.setTitleJustification(TitledBorder.CENTER);
 	    border.setTitlePosition(TitledBorder.TOP);
-		buttonPanel.setBorder(border);
-
+		titlePanel.setBorder(border);
+		
+		
+		JPanel buttonPanel = new JPanel();
 		generarCSVButton = new JButton("Importar CSV Estudiantes");
 		buttonPanel.add(generarCSVButton);
-		gestionSedesButton = new JButton("Gestionar Sedes");
-		buttonPanel.add(gestionSedesButton);
+		importarSedesButton = new JButton("Importar Sedes");
+		buttonPanel.add(importarSedesButton);
+		
 		getContentPane().add(buttonPanel, BorderLayout.CENTER);
+		getContentPane().add(titlePanel, BorderLayout.NORTH);
 		pack();
 	}
 	
