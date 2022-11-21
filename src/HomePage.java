@@ -23,7 +23,6 @@ public class HomePage extends JFrame{
 	    border.setTitlePosition(TitledBorder.TOP);
 		titlePanel.setBorder(border);
 		
-		
 		JPanel buttonPanel = new JPanel();
 		generarCSVButton = new JButton("Importar CSV Estudiantes");
 		buttonPanel.add(generarCSVButton);
