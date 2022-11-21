@@ -46,8 +46,8 @@ public class Interfaz_Usuario extends JFrame {
 						miBD.Insert("Insert into RespSede Values ('" + line + "'," + null + ");");
 					} catch (Exception e) {
 						RespSede s = new RespSede(line);
-						if(s==null){
-							text.setText("Error en la importacion en la lÃ­nea " + line + "\n");
+						if(s.getNombre()==null){
+							text.setText("Error en la importacion en la línea " + line + "\n");
 							error = true;
 						}
 						
@@ -60,7 +60,7 @@ public class Interfaz_Usuario extends JFrame {
 			ex.printStackTrace();
 		}
 		if (!error) {
-			text.setText("IMPORTACIÃ“N REALIZADA CON Ã‰XITO");
+			text.setText("IMPORTACIÓN REALIZADA CON ÉXITO");
 		}
 	}
 	
