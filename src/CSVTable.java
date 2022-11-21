@@ -68,14 +68,7 @@ public class CSVTable extends JFrame {
 						
 					}catch(Exception e){
 						
-					}
-								
-							
-							
-
-					
-					
-
+					}	
 				} else {
 					text.setText("ERROR EN LA IMPORTACIÓN: en la línea "
 							+ dataRow[1] + " " + dataRow[2] + " " + dataRow[0]
