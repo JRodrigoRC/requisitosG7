@@ -84,7 +84,7 @@ public class Alumno {
 	}
 
 	public String getDNI() {
-		return DNI;
+		return this.DNI;
 	}
 
 	public void BorrarAlumno() {

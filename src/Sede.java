@@ -16,11 +16,17 @@ public class Sede {
 	}
 
 	public RespSede respSede() {
-		BD miBD = new BD();
-		Object[] tupla = miBD.Select(
-				"SELECT nombre FROM RespSede where sede = " + this.id + ";")
-				.get(0);
-		return new RespSede((String) tupla[0]);
+		try{
+			BD miBD = new BD();
+			Object[] tupla = miBD.Select(
+					"SELECT nombre FROM RespSede where sede = " + this.id + ";")
+					.get(0);
+			return new RespSede((String) tupla[0]);
+		}catch (Exception e ){
+			//No tiene asignado
+			return null;
+		}
+		
 	}
 
 	public Sede(int id) {

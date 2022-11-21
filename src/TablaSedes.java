@@ -69,7 +69,7 @@ public class TablaSedes extends JFrame {
 	
 	public static void borrarSeleccionado() {
 		if(table.getSelectedRow() != -1) {
-		   Vector v = model.getDataVector().get(table.getSelectedRow()); 
+		   Vector v = (Vector) model.getDataVector().get(table.getSelectedRow()); 
 		   Sede sede = new Sede((String)v.get(0));
 		   sede.BorrarSede();
        	   model.removeRow(table.getSelectedRow());

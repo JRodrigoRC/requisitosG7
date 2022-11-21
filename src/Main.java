@@ -1,12 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Main {
 
 	public static void main(String[] args) {
-		HomePage mp = new HomePage("Página principal");
+		HomePage mp = new HomePage("Pagina principal");
 		mp.setVisible(true);
 		
 		HomePage.generarCSVButton.addActionListener(new ActionListener() {
@@ -18,7 +20,6 @@ public class Main {
 						CSVTable.generarTabla();
 					}
 				});
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 		
@@ -36,6 +37,45 @@ public class Main {
 			        	  TablaSedes.borrarSeleccionado();
 			          }});
 			}
+		});
+		
+		HomePage.asignarRespButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+			AsignacionResponsable frame = new AsignacionResponsable ("Asignar Responsable", "listado-de-posibles-responsables-de-sede");
+			frame.setVisible(true);
+			frame.CargarSedes();
+			AsignacionResponsable.importButton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					Interfaz_Usuario usu = new Interfaz_Usuario("Importar Usuarios");
+					usu.setVisible(true);
+					usu.ImportarResp();
+					usu.mostrarUsuarios();
+				}
+			}
+					);
+			AsignacionResponsable.asignarResp.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					if(frame.table.getSelectedRow()!=-1){
+						Vector v = (Vector) frame.model.getDataVector().get(frame.table.getSelectedRow());
+						String nSede = (String)v.get(0);
+						Asignar usu = new Asignar("Asignar Responsable");
+						usu.setVisible(true);
+						usu.mostrarUsuarios();
+						Asignar.asignar.addActionListener(new ActionListener(){
+							public void actionPerformed(ActionEvent e){
+								usu.asignar(nSede);
+							}
+						});
+						
+					}
+					
+				
+				}
+			});
+			
+			}
+
+			
 		});
 		
 		mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

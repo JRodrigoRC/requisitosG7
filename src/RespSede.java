@@ -20,7 +20,7 @@ public class RespSede {
 		try{
 			BD miBD = new BD();
 			Object[] tupla = miBD.Select(
-					"SELECT nombre FROM RespSede where nombre = '" + nombre + "';")
+					"SELECT * FROM RespSede where nombre = '" + nombre + "';")
 					.get(0);
 			this.nombre = nombre;
 			this.sede = new Sede((int)tupla[1]);

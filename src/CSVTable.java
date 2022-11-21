@@ -36,10 +36,12 @@ public class CSVTable extends JFrame {
 		boolean error = false;
 		String filePath = "datos-estudiantes-pevau.csv";
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					new FileInputStream(filePath), "UTF-8"));
 
 			br.readLine().trim();
-			String[] columnsName = { "Nombre", "Apellido", "Materia", "Instituto" };
+			String[] columnsName = { "Nombre", "Apellido", "Materia",
+					"Instituto" };
 
 			model = (DefaultTableModel) table.getModel();
 			model.setColumnIdentifiers(columnsName);
@@ -59,22 +61,32 @@ public class CSVTable extends JFrame {
 				String[] row = { dataRow[1], dataRow[2], dataRow[5], dataRow[0] };
 				if (!errorLinea) {
 					model.addRow(row);
-					try {
-						miBD.Insert("INSERT INTO Alumno VALUES ('" + dataRow[4] + "','" + dataRow[1] + "','"
+					try{
+						miBD.Insert("INSERT INTO Alumno VALUES ('"
+								+ dataRow[4] + "','" + dataRow[1] + "','"
 								+ dataRow[2] + "','\"" + dataRow[0] + "');");
-					} catch (Exception e) {
-
+						
+					}catch(Exception e){
+						
 					}
+								
+							
+							
+
+					
+					
+
 				} else {
-					text.setText("ERROR EN LA IMPORTACIÓN: en la línea " + dataRow[1] + " " + dataRow[2] + " "
-							+ dataRow[0] + "\n");
+					text.setText("ERROR EN LA IMPORTACIÓN: en la línea "
+							+ dataRow[1] + " " + dataRow[2] + " " + dataRow[0]
+							+ "\n");
 				}
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		if (!error) {
-			text.setText("IMPORTACIÓN REALIZADA CON ÉXITO");
+			text.setText("IMPORTACION REALIZADA CON EXITO");
 		}
 		table.setAutoCreateRowSorter(true);
 	}

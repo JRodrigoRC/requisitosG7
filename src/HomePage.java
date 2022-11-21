@@ -11,7 +11,7 @@ public class HomePage extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static JButton generarCSVButton, importarSedesButton;
+	static JButton generarCSVButton, importarSedesButton, asignarRespButton;
 
 	public HomePage(String title) {
 		super(title);
@@ -29,6 +29,8 @@ public class HomePage extends JFrame{
 		buttonPanel.add(generarCSVButton);
 		importarSedesButton = new JButton("Importar Sedes");
 		buttonPanel.add(importarSedesButton);
+		asignarRespButton = new JButton("Asignar Responsable");
+		buttonPanel.add(asignarRespButton);
 		
 		getContentPane().add(buttonPanel, BorderLayout.CENTER);
 		getContentPane().add(titlePanel, BorderLayout.NORTH);
