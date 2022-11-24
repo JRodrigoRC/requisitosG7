@@ -3,6 +3,7 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -57,23 +58,24 @@ public class Asignar extends JFrame{
 	}
 	
 	public void asignar(String nombre){
-		try{
+		
 			if(table.getSelectedRow()!=-1){
 				 Vector v = (Vector) model.getDataVector().get(table.getSelectedRow());
-				 Sede sede = new Sede(nombre);
-				 RespSede resp = new RespSede((String)v.get(0));
+				 BD miBD = new BD();
+				 Object[] sede = miBD.Select("SELECT * from Sede where nombre ='" + nombre + "';").get(0);
+				 Object[] resp = miBD.Select("SELECT * from RespSede where nombre ='" + (String)v.get(0) + "';").get(0);
 				 try{
-					 resp.setSede(sede);
+					 miBD.Update("UPDATE RespSede SET sede = " + (int)sede[0] + " WHERE nombre = '" + (String)resp[0]);
 				 }catch(Exception e){
-					 sede.respSede().setSede(null);
-					 resp.setSede(sede);
+					 miBD.Update("UPDATE RespSede SET sede = " + null + " WHERE sede = " + (int)sede[0]);
+					 miBD.Update("UPDATE RespSede SET sede = " + (int)sede[0] + " WHERE nombre = '" + (String)resp[0] + "'");
 				 }
 				 
-				 text.setText("El responsable " + resp.getNombre() + " ha sido asignado a la sede " + sede.getNombre());
+				 JOptionPane.showMessageDialog(null, "El responsable " + (String)resp[0] + " ha sido asignado a la sede " + (String)sede[1]);
+				 dispose();
 			}
-		}catch(Exception ex){
-			text.setText("Error al asignar");
+		
 		}
 		
 	}
-}
+

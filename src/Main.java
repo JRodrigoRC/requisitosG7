@@ -2,15 +2,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		HomePage mp = new HomePage("Pagina principal");
 		mp.setVisible(true);
-		
 		HomePage.generarCSVButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CSVTable frame = new CSVTable("Importar CSV", "datos-estudiantes-pevau.csv");
@@ -46,10 +46,9 @@ public class Main {
 			frame.CargarSedes();
 			AsignacionResponsable.importButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					Interfaz_Usuario usu = new Interfaz_Usuario("Importar Usuarios");
+					ImportarUsuario usu = new ImportarUsuario("Importar Usuarios");
 					usu.setVisible(true);
 					usu.ImportarResp();
-					usu.mostrarUsuarios();
 				}
 			}
 					);
@@ -64,6 +63,12 @@ public class Main {
 						Asignar.asignar.addActionListener(new ActionListener(){
 							public void actionPerformed(ActionEvent e){
 								usu.asignar(nSede);
+								frame.dispose();
+								AsignacionResponsable frame = new AsignacionResponsable ("Asignar Responsable", "listado-de-posibles-responsables-de-sede");
+								frame.setVisible(true);
+								frame.CargarSedes();
+								frame.importButton.setVisible(false);
+								frame.asignarResp.setVisible(false);
 							}
 						});
 						

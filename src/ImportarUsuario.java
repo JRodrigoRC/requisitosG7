@@ -1,26 +1,29 @@
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Interfaz_Usuario extends JFrame {
+public class ImportarUsuario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static JTable table;
 	static DefaultTableModel model;
 	static JTextField text;
+	
 
-
-	public Interfaz_Usuario(String title) {
+	public ImportarUsuario(String title) {
 		super(title);
 		table = new JTable();
 		JScrollPane scroll = new JScrollPane(table);
@@ -32,36 +35,50 @@ public class Interfaz_Usuario extends JFrame {
 
 	public void ImportarResp() {
 		boolean error = false;
-
-		String filePath = "listado-de-posibles-responsables-de-sede.txt";
+		boolean errorLinea = false;
+		JFileChooser fc;
+		fc = new JFileChooser();
+		fc.setApproveButtonText("Selecciona asignar");
+		fc.showSaveDialog(null);
+		File archivo = new File(fc.getSelectedFile().toString());
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(filePath), "UTF-8"));
+					new FileInputStream(archivo), "UTF-8"));
 			br.readLine().trim();
-			BD miBD = new BD();
+			String[] columnsName = {"Nombre responsable de sede"};
+			model = (DefaultTableModel)table.getModel();
+	        model.setColumnIdentifiers(columnsName);
 			Object[] tableLines = br.lines().toArray();
+			String insert = "INSERT IGNORE INTO RespSede Values ";
 			for (int i = 0; i < tableLines.length; i++) {
 				String line = tableLines[i].toString();
-					try {
-						miBD.Insert("Insert into RespSede Values ('" + line + "'," + null + ");");
-					} catch (Exception e) {
-						RespSede s = new RespSede(line);
-						if(s.getNombre()==null){
-							text.setText("Error en la importacion en la línea " + line + "\n");
-							error = true;
-						}
-						
-					
+				if(line.isEmpty()){
+					errorLinea= true;
+					error = true;
 				}
-
+				if(!errorLinea){
+					String [] row = {line};
+					model.addRow(row);
+					insert = insert.concat("('" + line + "'," + null + "),");
+				}else{
+					text.setText("Error linea " + i+1 + " :" + line);
+				}
+					errorLinea=false;
+				}
+				
+			insert = insert.substring(0, insert.length()-1);
+			insert.concat(";");
+			BD miBD = new BD();
+			miBD.Insert(insert);
+			if (!error) {
+				text.setText("IMPORTACIÓN REALIZADA CON ÉXITO");
 			}
+		} catch (Exception ex) {
+			dispose();
+			JOptionPane.showMessageDialog(null, "Archivo incorrecto");
 			
-		} catch (IOException ex) {
-			ex.printStackTrace();
 		}
-		if (!error) {
-			text.setText("IMPORTACIÓN REALIZADA CON ÉXITO");
-		}
+		
 	}
 	
 	public void mostrarUsuarios(){
@@ -82,5 +99,6 @@ public class Interfaz_Usuario extends JFrame {
         	model.addRow(row);
 		}
 	}
+	
 
 }

@@ -1,12 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,36 +44,40 @@ public class TablaSedes extends JFrame {
 	}
 
 	public static void ImportarSedes() {
-		String filePath = "sedes_pevau.txt";
+		JFileChooser fc;
+		fc = new JFileChooser();
+		fc.setApproveButtonText("Selecciona archivo");
+		fc.showSaveDialog(null);
+		File archivo = new File(fc.getSelectedFile().toString());
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "UTF-8"));
 			br.readLine().trim();
 			String[] columnsName = { "Sede"};
 			model = (DefaultTableModel) table.getModel();
 			model.setColumnIdentifiers(columnsName);
-
+			String insert = "Insert ignore into Sede Values ";
 			Object[] tableLines = br.lines().toArray();
             for(int i = 0; i < tableLines.length; i++) {
                 String line = tableLines[i].toString().trim();
                 String[] dataRow = line.split("\n");
                 model.addRow(dataRow);
-                try {
-                	new Sede(i, dataRow[0]);
-                } catch(Exception e) {
-                	
-                }
+                insert = insert.concat("(" + i + ",'"+line+"'),");
                 br.close();
             }
-		} catch(IOException ex) {
-			ex.printStackTrace();
+            insert = insert.substring(0, insert.length()-1);
+			insert.concat(";");
+			BD miBD = new BD();
+			miBD.Insert(insert);
+		} catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, "Archivo incorrecto");
 		}
 	}
 	
 	public static void borrarSeleccionado() {
 		if(table.getSelectedRow() != -1) {
 		   Vector v = (Vector) model.getDataVector().get(table.getSelectedRow()); 
-		   Sede sede = new Sede((String)v.get(0));
-		   sede.BorrarSede();
+		   BD miBD = new BD();
+		   miBD.Delete("DELETE FROM Sede where nombre = '" + (String)v.get(0) +"';");
        	   model.removeRow(table.getSelectedRow());
            JOptionPane.showMessageDialog(null, "Sede eliminada");
      		} else {
