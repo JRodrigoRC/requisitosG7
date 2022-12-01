@@ -1,30 +1,27 @@
+package Interfaces;
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ImportarUsuario extends JFrame {
+import Datos.BD;
+
+public class InterfazImportarResp extends JFrame{
 	private static final long serialVersionUID = 1L;
 	static JTable table;
 	static DefaultTableModel model;
 	static JTextField text;
-	
-
-	public ImportarUsuario(String title) {
-		super(title);
+	public InterfazImportarResp(String string) {
+		super(string);
 		table = new JTable();
 		JScrollPane scroll = new JScrollPane(table);
 		text = new JTextField();
@@ -33,7 +30,7 @@ public class ImportarUsuario extends JFrame {
 		pack();
 	}
 
-	public void ImportarResp() {
+	public static void importarResp() {
 		boolean error = false;
 		boolean errorLinea = false;
 		JFileChooser fc;
@@ -70,18 +67,19 @@ public class ImportarUsuario extends JFrame {
 			insert.concat(";");
 			BD miBD = new BD();
 			miBD.Insert(insert);
+			br.close();
 			if (!error) {
-				text.setText("IMPORTACIÓN REALIZADA CON ÉXITO");
+				text.setText("IMPORTACION REALIZADA CON EXITO");
 			}
 		} catch (Exception ex) {
-			dispose();
 			JOptionPane.showMessageDialog(null, "Archivo incorrecto");
 			
 		}
 		
+		
 	}
-	
-	public void mostrarUsuarios(){
+
+	public static void cargarResp() {
 		String[] columnsName = {"Nombre","Sede asignada"};
 		model = (DefaultTableModel)table.getModel();
         model.setColumnIdentifiers(columnsName);
@@ -98,7 +96,7 @@ public class ImportarUsuario extends JFrame {
         	String[] row = {nombre,resp};
         	model.addRow(row);
 		}
+		
 	}
-	
 
 }
