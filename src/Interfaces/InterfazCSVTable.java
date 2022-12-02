@@ -102,6 +102,14 @@ public class InterfazCSVTable extends JFrame{
 				insert.concat(";");
 				BD miBD = new BD();
 				miBD.Insert(insert);
+				insert = "INSERT IGNORE INTO Instituto(nombre,aforo) Values ";
+				for(Object[] tupla : miBD.Select("Select distinct(instituto), count(instituto) From Alumno group by instituto")) {
+					insert = insert.concat("('" + (String)tupla[0] + "'," + (long)tupla[1]+ "),");
+				}
+				insert = insert.substring(0, insert.length()-1);
+				insert.concat(";");
+				System.out.println(insert);
+				miBD.Insert(insert);
 				br.close();
 				if (!error) {
 					text.setText("IMPORTACION REALIZADA CON EXITO");
