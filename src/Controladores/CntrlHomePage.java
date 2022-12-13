@@ -31,6 +31,13 @@ public class CntrlHomePage implements ActionListener{
 			sed.setVisible(true);
 			InterfazAsignarResponsable.mostrarSedes();
 			InterfazAsignarResponsable.mostrarResp();
+		}else if(e.getActionCommand().equals(InterfazHomePage.GESTIONAR_SEDES)) {
+			InterfazGestionSedes sed = new InterfazGestionSedes();
+			CntrlGestionSedes ctrl = new CntrlGestionSedes(sed);
+			sed.controlador(ctrl);
+			sed.setVisible(true);
+			InterfazGestionSedes.mostrarSedes();
+
 		}
 		
 	}

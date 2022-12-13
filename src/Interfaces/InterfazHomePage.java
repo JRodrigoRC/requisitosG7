@@ -11,11 +11,12 @@ import Controladores.CntrlHomePage;
 
 public class InterfazHomePage extends JFrame{
 	private static final long serialVersionUID = 1L;
-	static JButton generarCSVButton, importarSedesButton, asignarRespButton;
+	static JButton generarCSVButton, importarSedesButton, asignarRespButton, gestionarSedes;
 	
 	public static String IMPORTAR_CSV = "IMPORTAR_CSV";
 	public static String IMPORTAR_SEDES = "IMPORTAR_SEDES";
 	public static String ASIGNAR_RESP = "ASIGNAR_RESP";
+	public static String GESTIONAR_SEDES = "GESTIONAR_SEDES";
 	
 	public InterfazHomePage(String title) {
 		super(title);
@@ -35,6 +36,8 @@ public class InterfazHomePage extends JFrame{
 		buttonPanel.add(importarSedesButton);
 		asignarRespButton = new JButton("Asignar Responsable");
 		buttonPanel.add(asignarRespButton);
+		gestionarSedes = new JButton("Gestionar Sedes");
+		buttonPanel.add(gestionarSedes);
 		
 		getContentPane().add(buttonPanel, BorderLayout.CENTER);
 		getContentPane().add(titlePanel, BorderLayout.NORTH);
@@ -50,6 +53,9 @@ public class InterfazHomePage extends JFrame{
 		
 		asignarRespButton.addActionListener(c);
 		asignarRespButton.setActionCommand(ASIGNAR_RESP);
+		
+		gestionarSedes.addActionListener(c);
+		gestionarSedes.setActionCommand(GESTIONAR_SEDES);
 		
 	}
 	
