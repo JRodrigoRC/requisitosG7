@@ -98,7 +98,16 @@ public class InterfazGestionSedes extends JFrame {
 		bAsignarVigilante.setActionCommand(ASIGNAR_VIGILANTE);
 	}
 
-
+	public int getID() {
+		String nombre;
+		DefaultTableModel model = (DefaultTableModel)table.getModel();
+		Vector v = (Vector) model.getDataVector().get(table.getSelectedRow());
+		nombre = (String) v.get(0);
+		BD miBD = new BD();
+		Object[] tupla = miBD.Select("SELECT id FROM Sede WHERE nombre = '" + nombre + "'").get(0);
+		int id = (Integer) tupla[0];
+		return id;
+	}
 
 	public static void mostrarSedes() {
 		String[] columnsName = {"Sedes"};
