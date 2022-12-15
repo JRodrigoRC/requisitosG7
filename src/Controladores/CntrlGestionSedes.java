@@ -3,6 +3,8 @@ package Controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Interfaces.InterfazAsignarInst;
+import Interfaces.InterfazGestAulas;
 import Interfaces.InterfazGestionSedes;
 
 
@@ -19,11 +21,17 @@ public class CntrlGestionSedes implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals(InterfazGestionSedes.ASIGNAR_INST)) {
-			//Aquí RF2.3
-			
+			InterfazAsignarInst inst = new InterfazAsignarInst();
+			CntrlAsignarInst ctrl = new CntrlAsignarInst(inst);
+			inst.controlador(ctrl);
+			inst.setVisible(true);
+			InterfazAsignarInst.mostrarSedes();
+			InterfazAsignarInst.mostrarInstitutos();
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.CRUD_AULAS)) {
-			//Aquí RF3
-			
+			InterfazGestAulas aulas = new InterfazGestAulas("Gestión de aulas");
+			CntrlGestAulas ctrl = new CntrlGestAulas(aulas);
+			aulas.controlador(ctrl);
+			aulas.setVisible(true);
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.IMPORTAR_MATERIAS)){
 			//Aquí RF4
 			
