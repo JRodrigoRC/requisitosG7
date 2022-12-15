@@ -20,11 +20,11 @@ public class CntrlGestAulas implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(InterfazGestAulas.INSERTAR_Aula)) {
-			frame.insertarAula();
+			InterfazGestAulas.addFila();
 		} else if (e.getActionCommand().equals(InterfazGestAulas.MODIFICAR_Aula)) {
-			
+			InterfazGestAulas.updateFila();
 		} else if(e.getActionCommand().equals(InterfazGestAulas.BORRAR_Aula)) {
-			InterfazGestAulas.borrarAula();
+			InterfazGestAulas.borrarSeleccionado();
 		}
 	}
 }
