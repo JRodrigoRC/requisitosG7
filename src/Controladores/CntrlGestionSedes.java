@@ -28,7 +28,7 @@ public class CntrlGestionSedes implements ActionListener{
 			InterfazAsignarInst.mostrarSedes();
 			InterfazAsignarInst.mostrarInstitutos();
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.CRUD_AULAS)) {
-			InterfazGestAulas aulas = new InterfazGestAulas("Gestión de aulas");
+			InterfazGestAulas aulas = new InterfazGestAulas("Gestión de aulas", frame.getID());
 			CntrlGestAulas ctrl = new CntrlGestAulas(aulas);
 			aulas.controlador(ctrl);
 			aulas.setVisible(true);
