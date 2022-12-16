@@ -1,6 +1,7 @@
 package Interfaces;
 
-import java.awt.EventQueue;
+
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +13,6 @@ import Datos.BD;
 
 import javax.swing.JTable;
 import javax.swing.JButton;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class InterfazGestionSedes extends JFrame {
@@ -107,6 +107,15 @@ public class InterfazGestionSedes extends JFrame {
 		Object[] tupla = miBD.Select("SELECT id FROM Sede WHERE nombre = '" + nombre + "'").get(0);
 		int id = (Integer) tupla[0];
 		return id;
+	}
+	
+	public boolean seleccionado() {
+		if(table.getSelectedRow()==-1) {
+			return false;
+		}else {
+			return true;
+		}
+		
 	}
 
 	public static void mostrarSedes() {

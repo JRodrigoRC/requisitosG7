@@ -3,6 +3,8 @@ package Controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import Interfaces.InterfazAsignarInst;
 import Interfaces.InterfazGestAulas;
 import Interfaces.InterfazGestionSedes;
@@ -28,10 +30,15 @@ public class CntrlGestionSedes implements ActionListener{
 			InterfazAsignarInst.mostrarSedes();
 			InterfazAsignarInst.mostrarInstitutos();
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.CRUD_AULAS)) {
-			InterfazGestAulas aulas = new InterfazGestAulas("Gestión de aulas", frame.getID());
-			CntrlGestAulas ctrl = new CntrlGestAulas(aulas);
-			aulas.controlador(ctrl);
-			aulas.setVisible(true);
+			if(frame.seleccionado()) {
+				InterfazGestAulas aulas = new InterfazGestAulas("Gestión de aulas", frame.getID());
+				CntrlGestAulas ctrl = new CntrlGestAulas(aulas);
+				aulas.controlador(ctrl);
+				aulas.setVisible(true);
+			}else {
+				JOptionPane.showMessageDialog(null,"Seleccione una sede");
+			}
+			
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.IMPORTAR_MATERIAS)){
 			//Aquí RF4
 			

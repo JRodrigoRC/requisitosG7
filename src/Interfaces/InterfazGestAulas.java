@@ -50,7 +50,7 @@ public class InterfazGestAulas extends JFrame {
 		initializeModel();
 
 		JPanel buttonPanel = new JPanel();
-		addButton = new JButton("A�adir Aula");
+		addButton = new JButton("Añadir Aula");
 		buttonPanel.add(addButton);
 		removeButton = new JButton("Eliminar Aula");
 		buttonPanel.add(removeButton);
@@ -157,14 +157,14 @@ public class InterfazGestAulas extends JFrame {
 
 	public static void addFila() {
 		if (textAula.getText().equals("") || textAforo.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Hay campos vac�os");
+			JOptionPane.showMessageDialog(null, "Hay campos vacios");
 		} else {
 			String[] data = { textAula.getText(), textAforo.getText(), (String)comboBox.getSelectedItem() };
 			model.addRow(data);
 			BD miBD = new BD();
 			miBD.Insert("INSERT INTO Aula VALUES(" + Integer.parseInt(data[0]) + "," + Integer.parseInt(data[1])
 					+ ",'" + (String)comboBox.getSelectedItem() + "'," + id + ");");
-			JOptionPane.showMessageDialog(null, "Se ha a�adido correctamente");
+			JOptionPane.showMessageDialog(null, "Se ha añadido correctamente");
 			textAula.setText("");
 			textAforo.setText("");
 		}
