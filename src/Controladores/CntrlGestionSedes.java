@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import Interfaces.InterfazAsignarInst;
+import Interfaces.InterfazCSVMateriasTable;
+import Interfaces.InterfazCSVTable;
 import Interfaces.InterfazGestAulas;
 import Interfaces.InterfazGestionSedes;
 
@@ -40,10 +42,13 @@ public class CntrlGestionSedes implements ActionListener{
 			}
 			
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.IMPORTAR_MATERIAS)){
-			//Aquí RF4
+			InterfazCSVMateriasTable csv = new InterfazCSVMateriasTable("Importar CSV materias");
+			CntrlCSVMateriasTable ctrl = new CntrlCSVMateriasTable(csv);
+			csv.controlador(ctrl);
+			csv.setVisible(true);
 			
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.CARGA_USUARIOS)) {
-			//Aquí RF6
+			
 			
 
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.ASIGNAR_RESP)) {
