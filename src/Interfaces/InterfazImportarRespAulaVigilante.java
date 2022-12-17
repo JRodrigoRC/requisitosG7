@@ -43,9 +43,9 @@ public class InterfazImportarRespAulaVigilante extends JFrame{
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					new FileInputStream(archivo), "UTF-8"));
 			br.readLine().trim();
-			String[] columnsName = {"Nombre responsable de aula"};
 			Object[] tableLines = br.lines().toArray();
 			String insert = "INSERT IGNORE INTO RespAula Values ";
+			String insert2 = "INSERT IGNORE INTO Vigilante Values ";
 			for (int i = 0; i < tableLines.length; i++) {
 				String line = tableLines[i].toString();
 				if(line.isEmpty()){
@@ -54,6 +54,7 @@ public class InterfazImportarRespAulaVigilante extends JFrame{
 				}
 				if(!errorLinea){
 					insert = insert.concat("('" + line + "'," + null + "),");
+					insert2 = insert2.concat("('" + line + "'),");
 				}else{
 					text.setText("Error linea " + i+1 + " :" + line);
 				}
@@ -61,9 +62,12 @@ public class InterfazImportarRespAulaVigilante extends JFrame{
 				}
 				
 			insert = insert.substring(0, insert.length()-1);
+			insert2 = insert2.substring(0, insert2.length()-1);
 			insert.concat(";");
+			insert2.concat(";");
 			BD miBD = new BD();
 			miBD.Insert(insert);
+			miBD.Insert(insert2);
 			br.close();
 			if (!error) {
 				text.setText("IMPORTACION REALIZADA CON EXITO");
