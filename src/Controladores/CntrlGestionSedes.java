@@ -6,10 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import Interfaces.InterfazAsignarInst;
+import Interfaces.InterfazAsignarResponsable;
 import Interfaces.InterfazCSVMateriasTable;
 import Interfaces.InterfazCSVTable;
 import Interfaces.InterfazGestAulas;
 import Interfaces.InterfazGestionSedes;
+import Interfaces.InterfazImportarResp;
+import Interfaces.InterfazImportarRespAulaVigilante;
 
 
 public class CntrlGestionSedes implements ActionListener{
@@ -48,9 +51,11 @@ public class CntrlGestionSedes implements ActionListener{
 			csv.setVisible(true);
 			
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.CARGA_USUARIOS)) {
+			InterfazImportarRespAulaVigilante csv = new InterfazImportarRespAulaVigilante("Importar responsables de Aula o Vigilantes");
+				csv.setVisible(true);
+				InterfazImportarRespAulaVigilante.importarRespAula();
+				InterfazImportarRespAulaVigilante.cargarRespAula();
 			
-			
-
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.ASIGNAR_RESP)) {
 			//Aquí RF7
 			
