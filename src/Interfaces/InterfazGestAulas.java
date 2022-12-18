@@ -162,7 +162,7 @@ public class InterfazGestAulas extends JFrame {
 			String[] data = { textAula.getText(), textAforo.getText(), (String)comboBox.getSelectedItem() };
 			model.addRow(data);
 			BD miBD = new BD();
-			miBD.Insert("INSERT INTO Aula VALUES(" + Integer.parseInt(data[0]) + "," + Integer.parseInt(data[1])
+			miBD.Insert("INSERT INTO Aula (id,aforo,franja,sede)VALUES(" + Integer.parseInt(data[0]) + "," + Integer.parseInt(data[1])
 					+ ",'" + (String)comboBox.getSelectedItem() + "'," + id + ");");
 			JOptionPane.showMessageDialog(null, "Se ha añadido correctamente");
 			textAula.setText("");

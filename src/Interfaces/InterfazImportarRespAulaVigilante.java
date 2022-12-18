@@ -42,10 +42,12 @@ public class InterfazImportarRespAulaVigilante extends JFrame{
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					new FileInputStream(archivo), "UTF-8"));
+		
 			br.readLine().trim();
 			Object[] tableLines = br.lines().toArray();
-			String insert = "INSERT IGNORE INTO RespAula Values ";
-			String insert2 = "INSERT IGNORE INTO Vigilante Values ";
+			String insert = "INSERT IGNORE INTO RespAula (nombre) Values ";
+			
+			String insert2 = "INSERT IGNORE INTO Vigilante (nombre) Values ";
 			for (int i = 0; i < tableLines.length; i++) {
 				String line = tableLines[i].toString();
 				if(line.isEmpty()){
@@ -53,7 +55,7 @@ public class InterfazImportarRespAulaVigilante extends JFrame{
 					error = true;
 				}
 				if(!errorLinea){
-					insert = insert.concat("('" + line + "'," + null + "),");
+					insert = insert.concat("('" + line + "'),");
 					insert2 = insert2.concat("('" + line + "'),");
 				}else{
 					text.setText("Error linea " + i+1 + " :" + line);
