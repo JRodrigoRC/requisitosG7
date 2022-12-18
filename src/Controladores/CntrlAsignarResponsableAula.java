@@ -49,13 +49,20 @@ public class CntrlAsignarResponsableAula implements ActionListener{
 	private boolean checkAsignadoFranja(String responsable, String f) {
 		// TODO Auto-generated method stub
 		BD bd = new BD();
+		boolean asignado = false;
+		
+		for(Object[] franja : bd.Select("SELECT franja FROM Vigilan WHERE vigilante = '" + responsable + "';"))
+		{
+			if(franja[0] != null && franja[0].toString().equals(f))
+				asignado = true;
+			//System.out.println(franja[0].toString() + " != " + objetivo);
+		}
 		for(Object[] franja : bd.Select("SELECT franja FROM Aula WHERE responsable_aula = '" + responsable + "';"))
 		{
 			if(franja[0] != null && franja[0].toString().equals(f))
-				return true;
+				asignado = true;
 			//System.out.println(franja[0].toString() + " != " + objetivo);
 		}
-		
-		return false;
+		return asignado;
 	}
 }
