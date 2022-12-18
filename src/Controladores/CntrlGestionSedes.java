@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 
 import Interfaces.InterfazAsignarInst;
 import Interfaces.InterfazAsignarResponsable;
+import Interfaces.InterfazAsignarResponsableAula;
+import Interfaces.InterfazAsignarVigilante;
 import Interfaces.InterfazCSVMateriasTable;
 import Interfaces.InterfazCSVTable;
 import Interfaces.InterfazGestAulas;
@@ -57,11 +59,23 @@ public class CntrlGestionSedes implements ActionListener{
 				InterfazImportarRespAulaVigilante.cargarRespAula();
 			
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.ASIGNAR_RESP)) {
-			//Aquí RF7
-			
+			if(frame.seleccionado()) {
+				InterfazAsignarResponsableAula intf = new InterfazAsignarResponsableAula("Asignar responsable de aula", frame);
+				CntrlAsignarResponsableAula cntrl = new CntrlAsignarResponsableAula(intf);
+				intf.controlador(cntrl);
+				intf.setVisible(true);				
+			} else {
+				JOptionPane.showMessageDialog(null,"Seleccione una sede");
+			}
 		}else if(e.getActionCommand().equals(InterfazGestionSedes.ASIGNAR_VIGILANTE)) {
-			//Aquí RF8
-			
+			if(frame.seleccionado()) {
+				InterfazAsignarVigilante intf = new InterfazAsignarVigilante("Asignar vigilante", frame);
+				CntrlAsignarVigilante cntrl = new CntrlAsignarVigilante(intf);
+				intf.controlador(cntrl);
+				intf.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null,"Seleccione una sede");
+			}
 		}
 		
 	}
